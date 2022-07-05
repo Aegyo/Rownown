@@ -9,6 +9,7 @@
 // ==/UserScript==
 
 const dexNormal = PokedexHelper.getImage.bind(PokedexHelper);
+const statsNormal = PokedexHelper.getImageStatistics.bind(PokedexHelper);
 const helpNormal = PokemonHelper.getImage.bind(PokemonHelper);
 
 const dexShowShinies = () => PokedexHelper.toggleAllShiny ? PokedexHelper.toggleAllShiny() : !PokedexHelper.hideShinyImages()
@@ -28,6 +29,15 @@ const betterDex = (id) => {
     }
 }
 
+const betterStats = (id) => {
+    if (isUnown(id)) {
+        const shiny = App.game.party.alreadyCaughtPokemon(id, true) && PokedexHelper.toggleStatisticShiny();
+        return unown(id, shiny);
+    } else {
+        return statsNormal(id);
+    }
+}
+
 const betterHelp = (p, shiny) => {
     if (isUnown(p.id)) {
         return unown(p.id, shiny);
@@ -37,4 +47,5 @@ const betterHelp = (p, shiny) => {
 }
 
 PokedexHelper.getImage = betterDex;
+PokedexHelper.getImageStatistics = betterStats;
 PokemonHelper.getImage = betterHelp;
