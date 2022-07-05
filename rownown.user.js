@@ -11,7 +11,8 @@
 const normal = PokedexHelper.getImage.bind(PokedexHelper)
 const better = (id) => {
     if (Math.floor(Number(id)) === 201) {
-        return "https://cdn.discordapp.com/attachments/979581562704252970/993395219066269696/R201-15.png"
+        const name = `R${String(id).split('.').map(Number).join('-')}`
+        return `https://aegyo.github.io/Rownown/images//${name}.png`
     } else {
         return normal(id)
     }
